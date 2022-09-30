@@ -1,0 +1,9 @@
+rule HELP
+    command = ninja -t targets
+    description = targets available:
+rule CLEAN
+    command = ninja -t clean
+    description = cleaning built files
+rule compile-cpp
+    command = gcc -I src/engine/include/gfx/ $in -lSDL -lGLEW -lGL -lGLU -o $out
+    description = --GCC compiling $in
