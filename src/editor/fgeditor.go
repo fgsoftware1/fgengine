@@ -28,7 +28,7 @@ var (
 func init() {
 	runtime.LockOSThread()
 
-	dir, err := ImportPathToDir("github.com/go-gl/example/gl21-cube")
+	dir, err := utils.ImportPathToDir("")
 	if err != nil {
 		log.Fatalln("Unable to find Go package in your GOPATH, it's needed to load assets:", err)
 	}
