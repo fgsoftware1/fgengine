@@ -1,10 +1,10 @@
-
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include "../include/GLShader.hpp"
+#include "GL/glew.h"
+#include "include/GLShader.hpp"
 
 using namespace std;
 

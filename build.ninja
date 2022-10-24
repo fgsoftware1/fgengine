@@ -1,0 +1,12 @@
+include rules.ninja
+
+#util
+build help: HELP
+build clean: CLEAN
+
+#engine
+build ./build/fgengine.o: compile-cpp ./src/engine/GLShader.cpp
+#editor
+build ./build/fgeditor: compile-cpp ./src/editor/fgeditor.cpp
+
+default ./build/fgengine.o ./build/fgeditor

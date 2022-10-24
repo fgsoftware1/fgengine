@@ -91,7 +91,7 @@ int window()
         glfwSwapBuffers(gameWindow);
     }
 
-    glfwTerminate();    
+    glfwTerminate();
     return 0;
 }
 
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
     GLuint program = LoadShader("../assets/shaders/shader.vert", "../assets/shaders/shader.frag");
 
     window();
-    //glUseProgram(program);
+    glUseProgram(program);
 
     return 0;
 }
