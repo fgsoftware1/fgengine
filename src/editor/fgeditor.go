@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"runtime"
-	"fgengine/utils"
 
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.0/glfw"
