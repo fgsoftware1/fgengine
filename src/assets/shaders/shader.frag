@@ -1,12 +1,14 @@
-#version 410 core
+#version 310 es
+#ifdef GL_ES
+    precision highp float;
+#endif
 
-precision mediump int;
-precision mediump float;
+uniform sampler2D tex;
 
-uniform sampler2D texture;
-varying vec2 texcoord;
+in vec2 fragTexCoord;
 
-void main()
-{
-  gl_FragColor = texture2D(texture, texcoord);
+out vec4 outputColor;
+
+void main() {
+    outputColor = texture(tex, fragTexCoord);
 }

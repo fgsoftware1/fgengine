@@ -1,15 +1,18 @@
-#version 410 core
+#version 310 es
+#ifdef GL_ES
+    precision highp float;
+#endif
 
-precision mediump int;
-precision mediump float;
+uniform mat4 projection;
+uniform mat4 camera;
+uniform mat4 model;
 
-uniform mat4 matrix;
-attribute vec4 position;
-attribute vec2 atexcoord;
-varying vec2 vtexcoord;
+in vec3 vert;
+in vec2 vertTexCoord;
 
-void main()
-{
-	gl_Position = matrix * position;
-    vtexcoord = atexcoord;
+out vec2 fragTexCoord;
+
+void main() {
+    fragTexCoord = vertTexCoord;
+    gl_Position = projection * camera * model * vec4(vert, 1);
 }
