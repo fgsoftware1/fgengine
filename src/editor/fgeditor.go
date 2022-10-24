@@ -5,12 +5,12 @@ import (
 	"go/build"
 	"image"
 	"image/draw"
-	"image/jpeg"
 	"log"
 	"os"
 	"runtime"
 	"strings"
 
+	"github.com/fgsoftware1/fgengine/assets"
 	"github.com/go-gl/gl/v4.6-core/gl"
 	"github.com/go-gl/glfw/v3.0/glfw"
 	"github.com/go-gl/mathgl/mgl32"
@@ -74,7 +74,7 @@ func main() {
 	gl.BindFragDataLocation(program, 0, gl.Str("outputColor\x00"))
 
 	// Load the texture
-	texture, err := newTexture("sonic.jpeg")
+	texture, err := newTexture("square.png")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -196,7 +196,7 @@ func newTexture(file string) (uint32, error) {
 	if err != nil {
 		return 0, fmt.Errorf("texture %q not found on disk: %v", file, err)
 	}
-	img, err := jpeg.Decode(imgFile)
+	img, _, err := image.Decode(imgFile)
 	if err != nil {
 		return 0, err
 	}
@@ -312,7 +312,7 @@ var cubeVertices = []float32{
 
 // Set the working directory to the root of Go package, so that its assets can be accessed.
 func init() {
-	dir, err := importPathToDir("github.com/fgsoftware1/fgengine/")
+	dir, err := importPathToDir("github.com/fgsoftware1/fgengine/src/editor")
 	if err != nil {
 		log.Fatalln("Unable to find Go package in your GOPATH, it's needed to load assets:", err)
 	}
