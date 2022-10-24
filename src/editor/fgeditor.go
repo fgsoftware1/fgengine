@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.0/glfw"
+	"github.com/fgsoftware1/fgengine/src/editor/utils"
 )
 
 const (
@@ -27,7 +28,7 @@ var (
 func init() {
 	runtime.LockOSThread()
 
-	dir, err := importPathToDir("github.com/go-gl/example/gl21-cube")
+	dir, err := ImportPathToDir("github.com/go-gl/example/gl21-cube")
 	if err != nil {
 		log.Fatalln("Unable to find Go package in your GOPATH, it's needed to load assets:", err)
 	}
