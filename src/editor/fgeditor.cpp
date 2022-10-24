@@ -1,8 +1,8 @@
 #include "GL/glew.h"
-#include <GLFW/glfw3.h>
+#include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "../engine/include/GLShader.hpp"
+//#include "../engine/include/GLShader.hpp"
 
 float angle = 0.0;
 const int triangle = 1;
@@ -70,37 +70,44 @@ void display()
 
 int window()
 {
-    if(!glfwInit())
-    {
-        return -1;
-    }
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Surface *screen;
+    SDL_SetVideoMode(1366, 768, 8, SDL_SWSURFACE|SDL_OPENGL);
 
-    auto gameWindow = glfwCreateWindow(1366, 768, "fgeditor", NULL, NULL);
-    if(!gameWindow)
-    {
-        glfwTerminate();
-        return -1;
-    }
+    bool running = true;
+    const int FPS = 30;
+    Uint32 start;
+    SDL_Event event;
 
-    glfwMakeContextCurrent(gameWindow);
+    init();
+    while(running) {
+        start = SDL_GetTicks();
+        while(SDL_PollEvent(&event)) {
+            switch(event.type) {
+                case SDL_QUIT:
+                    running = false;
+                    break;
+            }
+        }
 
-    while(!glfwWindowShouldClose(gameWindow))
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
         display();
-        glfwSwapBuffers(gameWindow);
+        SDL_GL_SwapBuffers();
+        angle += 0.5;
+        if(angle > 360)
+            angle -= 360;
+        if(1000/FPS > SDL_GetTicks()-start)
+            SDL_Delay(1000/FPS-(SDL_GetTicks()-start));
     }
-
-    glfwTerminate();
+    SDL_Quit();
     return 0;
 }
 
 int main(int argc, char *argv[])
 {
-    GLuint program = LoadShader("../assets/shaders/shader.vert", "../assets/shaders/shader.frag");
+    //GLuint program = LoadShader("../assets/shaders/shader.vert", "../assets/shaders/shader.frag");
 
     window();
-    glUseProgram(program);
+    //glUseProgram(program);
 
     return 0;
 }
