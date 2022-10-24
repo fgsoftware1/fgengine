@@ -3,13 +3,13 @@ package main
 import (
 	"image"
 	"image/draw"
+	"image/png"
 	"log"
 	"os"
 	"runtime"
 
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.0/glfw"
-	"github.com/fgsoftware1/fgengine/src/editor/utils"
 )
 
 const (
@@ -27,15 +27,6 @@ var (
 
 func init() {
 	runtime.LockOSThread()
-
-	dir, err := utils.ImportPathToDir("")
-	if err != nil {
-		log.Fatalln("Unable to find Go package in your GOPATH, it's needed to load assets:", err)
-	}
-	err = os.Chdir(dir)
-	if err != nil {
-		log.Panicln("os.Chdir:", err)
-	}
 }
 
 func main() {
@@ -70,7 +61,8 @@ func newTexture(file string) uint32 {
 	if err != nil {
 		log.Fatalf("texture %q not found on disk: %v\n", file, err)
 	}
-	img, _, err := image.Decode(imgFile)
+
+	img, err := png.Decode(imgFile)
 	if err != nil {
 		panic(err)
 	}
@@ -114,6 +106,7 @@ func setupScene() {
 	ambient := []float32{0.5, 0.5, 0.5, 1}
 	diffuse := []float32{1, 1, 1, 1}
 	lightPosition := []float32{-5, 5, 10, 0}
+
 	gl.Lightfv(gl.LIGHT0, gl.AMBIENT, &ambient[0])
 	gl.Lightfv(gl.LIGHT0, gl.DIFFUSE, &diffuse[0])
 	gl.Lightfv(gl.LIGHT0, gl.POSITION, &lightPosition[0])
