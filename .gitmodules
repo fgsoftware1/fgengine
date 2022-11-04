@@ -1,3 +1,0 @@
-[submodule "src/include/math"]
-	path = src/include/math
-	url = https://github.com/fgsoftware1/fgmath.git
