@@ -1,9 +1,0 @@
-rule HELP
-    command = ninja -t targets
-    description = targets available:
-rule CLEAN
-    command = ninja -t clean
-    description = cleaning built files
-rule compile-cpp
-    command = g++ -I src/engine/include/ $in -lglfw -lGLEW -lGL -lGLU -lpthread -o $out
-    description = --GCC compiling $in

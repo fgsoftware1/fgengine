@@ -1,60 +1,102 @@
 ﻿#pragma once
-#ifndef Quaternion_HPP
-#define Quaternion_HPP
-#include "Matrix3.hpp"
-#include "Vector3.hpp"
+
+#include "Common.h"
+#include "utils/types.h"
+#include "Matrix4.hpp"
 
 namespace fgengine
 {
-	namespace math{
-		class Quaternion
+	namespace math
+	{
+		struct FGE_API Quaternion
 		{
-		private:
-		public:
-			float s;
-
-			Vector3 v;
+			float x, y, z, w;
 
 			Quaternion();
+			Quaternion(const Quaternion &quaternion);
+			Quaternion(float x, float y, float z, float w);
+			Quaternion(const Vector3 &xyz, float w);
+			Quaternion(const Vector4 &vec);
+			Quaternion(float scalar);
 
-			Quaternion(float uS, Vector3 & uV);
+			Quaternion &operator=(const Quaternion &quat);
 
-			~Quaternion();
+			Quaternion &SetXYZ(const Vector3 &vec);
+			const Vector3 GetXYZ() const;
 
-			Quaternion(const Quaternion & value);
+			Quaternion &SetElem(i32 idx, float value);
+			float GetElem(i32 idx) const;
+			Vector3 GetAxis() const;
+			Vector3 ToEulerAngles() const;
 
-			inline Quaternion& operator=(const Quaternion & value);
+			const Quaternion operator+(const Quaternion &Quaternion) const;
+			const Quaternion operator-(const Quaternion &Quaternion) const;
+			const Quaternion operator*(const Quaternion &Quaternion) const;
+			const Quaternion operator*(float scalar) const;
+			const Quaternion operator/(float scalar) const;
+			float operator[](i32 idx) const;
 
-			void operator+=(const Quaternion & q);
-			void operator-=(const Quaternion & q);
-			void operator*=(const Quaternion & q);
-			void operator*=(float value);
+			Quaternion &operator+=(const Quaternion &Quaternion)
+			{
+				*this = *this + Quaternion;
+				return *this;
+			}
 
-			Quaternion operator+(const Quaternion & q) const;
-			Quaternion operator-(const Quaternion & q) const;
-			Quaternion operator*(const Quaternion & q) const;
-			Quaternion operator*(const Vector3 & uValue) const;
-			Quaternion operator*(float value) const;
+			Quaternion &operator-=(const Quaternion &Quaternion)
+			{
+				*this = *this - Quaternion;
+				return *this;
+			}
 
-			void normalize();
-			void convertToUnitNormQuaternion();
-			void inverse(Quaternion & q);
-			void transformEulerAnglesToQuaternion(float x, float y, float z);
-			void transformMatrix3ToQuaternion(Matrix3 & uMatrix);
-			void show();
+			Quaternion &operator*=(const Quaternion &Quaternion)
+			{
+				*this = *this * Quaternion;
+				return *this;
+			}
 
-			Quaternion multiply(const Quaternion & q) const;
-			Quaternion conjugate();
-			Quaternion inverse();
+			Quaternion &operator*=(float scalar)
+			{
+				*this = *this * scalar;
+				return *this;
+			}
 
-			Matrix3 transformQuaternionToMatrix3();
+			Quaternion &operator/=(float scalar)
+			{
+				*this = *this / scalar;
+				return *this;
+			}
 
-			Vector3 transformQuaternionToEulerAngles();
+			const Quaternion operator-() const;
+			bool operator==(const Quaternion &quaternion) const;
+			bool operator!=(const Quaternion &quaternion) const;
+			static Quaternion Identity();
+			static Quaternion FromEulerAngles(const Vector3 &angles);
 
-			float dot(Quaternion & q);
-			float norm();
+			static Vector3 Rotate(const Quaternion &quat, const Vector3 &vec);
+
+			static const Quaternion Rotation(const Vector3 &unitVec0, const Vector3 &unitVec1);
+			static const Quaternion Rotation(float radians, const Vector3 &unitVec);
+
+			static const Quaternion RotationX(float radians)
+			{
+				float angle = radians * 0.5f;
+				return Quaternion(sin(angle), 0.0f, 0.0f, cos(angle));
+			}
+
+			static const Quaternion RotationY(float radians)
+			{
+				float angle = radians * 0.5f;
+				return Quaternion(0.0f, sin(angle), 0.0f, cos(angle));
+			}
+
+			static const Quaternion RotationZ(float radians)
+			{
+				float angle = radians * 0.5f;
+				return Quaternion(0.0f, 0.0f, sin(angle), cos(angle));
+			}
+
+			float Dot(const Quaternion &other) const;
+			Quaternion Conjugate() const;
 		};
 	}
 }
-
-#endif

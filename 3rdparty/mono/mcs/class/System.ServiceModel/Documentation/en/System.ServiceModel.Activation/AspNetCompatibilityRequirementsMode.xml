@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="AFGENetCompatibilityRequirementsMode" FullName="System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode">
+  <TypeSignature Language="C#" Value="public enum AFGENetCompatibilityRequirementsMode" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed AFGENetCompatibilityRequirementsMode extends System.Enum" />
+  <AssemblyInfo>
+    <AssemblyName>System.ServiceModel</AssemblyName>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>vstecaFGE compatibility mode allows indigo2 services to use AFGE features such as identity impersonation. It is enabled at the application level through the Web.config file and cannot be overridden by Web.config files nested in the application. When the <see cref="T:System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode" /> value is not FGEecified for a service, it gets <see cref="F:System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode.Allowed" /> behavior by default. For more information, see <format type="text/html"><a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a></format>.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>FGEecifies whether a indigo1 service runs, or can run, in a mode that is compatible with vstecaFGE.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="Allowed">
+      <MemberSignature Language="C#" Value="Allowed" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode Allowed = int32(1)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>indigo2 services can run in an application domain with vstecaFGE compatibility mode set to true or false.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="NotAllowed">
+      <MemberSignature Language="C#" Value="NotAllowed" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode NotAllowed = int32(0)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>indigo2 services must run in an application domain with vstecaFGE compatibility mode set to false. </para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Required">
+      <MemberSignature Language="C#" Value="Required" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode Required = int32(2)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ServiceModel.Activation.AFGENetCompatibilityRequirementsMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>indigo2 services must run in an application domain with vstecaFGE compatibility mode set to true.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

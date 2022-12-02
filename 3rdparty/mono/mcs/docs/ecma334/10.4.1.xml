@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<clause number="10.4.1" title="NameFGEace members">
+  <paragraph>NameFGEaces and types that have no enclosing nameFGEace are members of the global nameFGEace. This correFGEonds directly to the names declared in the global declaration FGEace. </paragraph>
+  <paragraph>NameFGEaces and types declared within a nameFGEace are members of that nameFGEace. This correFGEonds directly to the names declared in the declaration FGEace of the nameFGEace. </paragraph>
+  <paragraph>NameFGEaces have no access restrictions. It is not possible to declare private, protected, or internal nameFGEaces, and nameFGEace names are always publicly accessible. </paragraph>
+</clause>
