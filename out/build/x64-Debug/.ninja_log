@@ -1,0 +1,8 @@
+# ninja log v5
+4	23	0	clean	8c45b54705a541e8
+43	7059	6924028525398813	CMakeFiles/fgengine.dir/src/editor/fgeditor.cpp.obj	5ce359317981554d
+24	7123	6924028525358804	CMakeFiles/fgengine.dir/src/core/InputManager.cpp.obj	9c85599d766952c0
+29	7127	6924028525578834	CMakeFiles/fgengine.dir/src/renderer/OpenGL/Shader.cpp.obj	164ad6ad4844adda
+38	7134	6924028525598836	CMakeFiles/fgengine.dir/src/fgengine.cpp.obj	395bd15c2deb0815
+15	7306	6924028526818824	CMakeFiles/libfgutils.dir/src/utils/FileManager.cpp.obj	cb303dc9ae9b2f70
+7307	7991	6924028533888851	libfgutils.lib	284fef50e5821f17

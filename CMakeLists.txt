@@ -16,39 +16,41 @@ endif()
 
 include_directories(
     src/include
-    src/editor/include
 )
 
-set(LIBFGMATH_FILES
-    src/fgmath/Vector2.cpp
-    src/fgmath/Vector3.cpp 
-    src/fgmath/Vector4.cpp 
-    src/fgmath/Matrix4.cpp
-    src/fgmath/Quaternion.cpp 
-    src/fgmath/Rectangle.cpp 
-    src/fgmath/AABB.cpp 
-)
-set(LIBFGINPUT_FILES
-    src/fginput/Mouse.cpp
-    src/fginput/Keyboard.cpp 
+set(LIBFGUTILS_FILES
+    src/utils/FileManager.cpp
 )
 set(SOURCE_FILES
     #core
     src/core/InputManager.cpp
-    #ecs
     #renderer
-    #src/renderer/renderer.cpp
+    src/renderer/OpenGL/Shader.cpp
     #engine
-    src/graphics/Window.cpp
     src/fgengine.cpp
+    #editor
+    src/editor/fgeditor.cpp
 )
 
-add_library(libfgmath STATIC ${LIBFGMATH_FILES})
+add_library(libfgutils STATIC ${LIBFGUTILS_FILES})
 
 add_executable(fgengine 
     ${SOURCE_FILES}
 )
 
+add_custom_command(TARGET fgengine
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/assets/shader.vs ${PROJECT_BINARY_DIR}
+    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/assets/shader.fs ${PROJECT_BINARY_DIR}
+)
+
+target_compile_definitions(fgengine PUBLIC 
+    GLEW_STATIC 
+    IMGUI_IMPL_OPENGL_LOADER_GLEW
+)
 target_link_libraries(fgengine
+    ${CMAKE_SOURCE_DIR}/libs/libglew.lib
+    ${CMAKE_SOURCE_DIR}/libs/libimgui.lib
     ${CMAKE_SOURCE_DIR}/libs/libfgmath.lib
+    ${CMAKE_SOURCE_DIR}/libs/libfgutils.lib
 )
