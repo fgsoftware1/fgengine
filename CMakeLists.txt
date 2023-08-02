@@ -1,19 +1,11 @@
 cmake_minimum_required(VERSION 3.25)
 project(FGE LANGUAGES CXX C)
 
-add_subdirectory(vendor/glm)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/devil/DevIL/src-IL)
 
 add_definitions(-DFMT_HEADER_ONLY)
 add_compile_options(-fPIC)
-
-if(UNIX)
-	find_package(OpenGL REQUIRED)
-	find_package(DevIL REQUIRED)
-	include_directories(
-		${OPENGL_INCLUDE_DIR}
-		"/usr/include/spdlog"
-	)
-endif()
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
 	add_compile_options(-g)
@@ -23,21 +15,22 @@ include_directories(
 	#ROOT
 	${CMAKE_CURRENT_SOURCE_DIR}
 	#VENDOR
-	"vendor/glad/include"
-	"vendor/imgui"
-	"vendor/imgui/backends"
-	"vendor/filewatch"
-	"vendor/glm/glm"
-	"vendor/glm/glm/gtc"
+	${CMAKE_CURRENT_SOURCE_DIR}/"vendor/glad/include"
+	${CMAKE_CURRENT_SOURCE_DIR}/"vendor/imgui/backends"
+	${CMAKE_CURRENT_SOURCE_DIR}/"vendor/imgui"
+	${CMAKE_CURRENT_SOURCE_DIR}/"vendor/filewatch"
+	${CMAKE_CURRENT_SOURCE_DIR}/"vendor/glm/glm"
+	${CMAKE_CURRENT_SOURCE_DIR}/"vendor/glm/glm/gtc"
+	${CMAKE_CURRENT_SOURCE_DIR}/"vendor/devil/DevIL/include"
 	#ENGINE
-	"src/engine"
-    "src/engine/core"
-	"src/engine/renderer"
-	"src/engine/renderer/openGL"
-    "src/engine/ecs"
-    "src/engine/ecs/components"
+	${CMAKE_CURRENT_SOURCE_DIR}/"src/engine"
+    ${CMAKE_CURRENT_SOURCE_DIR}/"src/engine/core"
+	${CMAKE_CURRENT_SOURCE_DIR}/"src/engine/renderer"
+	${CMAKE_CURRENT_SOURCE_DIR}/"src/engine/renderer/openGL"
+    ${CMAKE_CURRENT_SOURCE_DIR}/"src/engine/ecs"
+    ${CMAKE_CURRENT_SOURCE_DIR}/"src/engine/ecs/components"
 	#EDITOR
-	"src/editor/panels"
+	${CMAKE_CURRENT_SOURCE_DIR}/"src/editor/panels"
 )
 
 file(GLOB_RECURSE IMGUI_SRC
@@ -56,7 +49,7 @@ file(GLOB_RECURSE ENGINE_SRC
     "src/engine/ecs/components/*.cpp"
 )
 file(GLOB_RECURSE EDITOR_SRC
-	"src/editor/panels/*.cpp"
+	${CMAKE_CURRENT_SOURCE_DIR}/"src/editor/panels/*.cpp"
 )
 
 add_library(glad STATIC vendor/glad/src/glad.c)
@@ -68,7 +61,6 @@ target_precompile_headers(engine PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/utils.hpp
 )
 target_link_libraries(engine PRIVATE
-	GL
 	glm
 	glad
 	glfw
