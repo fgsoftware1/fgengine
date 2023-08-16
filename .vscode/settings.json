@@ -79,11 +79,31 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "filesystem": "cpp",
+        "forward_list": "cpp",
+        "ios": "cpp",
+        "locale": "cpp",
+        "unordered_set": "cpp",
+        "xfacet": "cpp",
+        "xhash": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "xlocbuf": "cpp",
+        "xlocinfo": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xmemory": "cpp",
+        "xstring": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp"
     },
     "restructuredtext.pythonRecommendation.disabled": true,
     "esbonio.sphinx.confDir": "${workspaceFolder}/docs/source",
     "restructuredtext.syntaxHighlighting.disabled": true,
     "C_Cpp.default.compileCommands": "builddir/compile_commands.json",
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "dotnet.defaultSolution": "disable"
 }

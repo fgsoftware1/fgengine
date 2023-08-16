@@ -1,7 +1,4 @@
-!build/fge.png
-!./build/assets
-build/*
-*.a
-.xmake
-src/editor/panels
 /.vs
+build/
+*.a
+*.exe
