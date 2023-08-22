@@ -11,8 +11,8 @@
 [submodule "vendor/glfw"]
 	path = vendor/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "build/Debug/vendor/devil"]
-	path = build/Debug/vendor/devil
+[submodule "vendor/devil"]
+	path = vendor/devil
 	url = https://github.com/fgsoftware1/DevIL.git
 [submodule "vendor/mono"]
 	path = vendor/mono
