@@ -25,6 +25,10 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw/include
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb/include
+	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/utils
+	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/metadata
+	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/utils
+	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/jit
 	#ENGINE
 	${CMAKE_CURRENT_SOURCE_DIR}/src/engine
     ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/core
