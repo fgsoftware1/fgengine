@@ -1,6 +1,6 @@
 [submodule "vendor/imgui"]
 	path = vendor/imgui
-	url = https://github.com/ocornut/imgui.git
+	url = https://github.com/ocornut/imgui
 	branch = docking
 [submodule "vendor/glm"]
 	path = vendor/glm
@@ -14,3 +14,6 @@
 [submodule "build/Debug/vendor/devil"]
 	path = build/Debug/vendor/devil
 	url = https://github.com/fgsoftware1/DevIL.git
+[submodule "vendor/devil"]
+	path = vendor/devil
+	url = https://github.com/DentonW/DevIL.git
