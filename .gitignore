@@ -1,4 +1,5 @@
 /.vs
 build/
+dist/imgui.ini
 *.a
 *.exe
