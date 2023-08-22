@@ -11,7 +11,9 @@ namespace engine
 
 		void ScriptComponent::Update()
 		{
+#ifndef NDEBUG
 			engine::core::Logger::Debug(engine::core::LogChannel::Scripting, "Running script from: " + m_ScriptPath);
+#endif // NDEBUG
 		}
 	} // namespace ecs
 } // namespace engine
