@@ -4,7 +4,7 @@
 #pragma once
 
 #include "pch.hpp"
-#include "spdlog.h"
+#include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 #include "imgui.h"
 

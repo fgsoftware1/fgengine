@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.25)
 project(FGE LANGUAGES CXX C)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/devil/DevIL/src-IL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/devil/DevIL/src-ILU)
-#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog)
-#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw)
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
 	add_compile_options(-g)
@@ -35,7 +35,7 @@ include_directories(
 	#EDITOR
 	${CMAKE_CURRENT_SOURCE_DIR}/src/editor/panels
 )
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/libs)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/libs/mono)
 
 file(GLOB_RECURSE IMGUI_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui/imgui.cpp
@@ -65,12 +65,12 @@ target_precompile_headers(engine PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/utils.hpp
 )
 target_link_libraries(engine PRIVATE
-	spdlogd
+	spdlog
 	glm
 	glad
 	IL
 	ILU
-	glfw3
+	glfw
 	imgui
 )
 
@@ -79,13 +79,15 @@ target_link_libraries(sandbox
 	engine
 )
 
-add_custom_target(CopyFiles ALL
+add_custom_target(Copyfiles ALL
 	COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_SOURCE_DIR}/dist
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_SOURCE_DIR}/dist
 	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:sandbox> ${CMAKE_CURRENT_SOURCE_DIR}/dist
 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/imgui.ini ${CMAKE_CURRENT_SOURCE_DIR}/dist
-	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/libs/DevIL.dll ${CMAKE_CURRENT_SOURCE_DIR}/dist
-	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/libs/ILU.dll ${CMAKE_CURRENT_SOURCE_DIR}/dist
+	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IL> ${CMAKE_CURRENT_SOURCE_DIR}/dist
+	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:ILU> ${CMAKE_CURRENT_SOURCE_DIR}/dist
+	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:spdlog> ${CMAKE_CURRENT_SOURCE_DIR}/dist
+	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:glfw> ${CMAKE_CURRENT_SOURCE_DIR}/dist
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets ${CMAKE_CURRENT_SOURCE_DIR}/dist/assets
     COMMENT Copying files...
 )

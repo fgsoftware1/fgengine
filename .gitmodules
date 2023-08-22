@@ -17,3 +17,6 @@
 [submodule "vendor/devil"]
 	path = vendor/devil
 	url = https://github.com/DentonW/DevIL.git
+[submodule "vendor/vendor/mono"]
+	path = vendor/vendor/mono
+	url = https://github.com/mono/mono.git
