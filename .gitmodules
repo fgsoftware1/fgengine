@@ -8,9 +8,6 @@
 [submodule "vendor/glfw"]
 	path = vendor/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "vendor/devil"]
-	path = vendor/devil
-	url = https://github.com/fgsoftware1/DevIL.git
 [submodule "vendor/mono"]
 	path = vendor/mono
 	url = https://github.com/mono/mono.git
