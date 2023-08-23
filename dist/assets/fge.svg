@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+	<polygon points="50,50 150,50 150,150 50,150" fill="#ff0000" />
+	<polygon points="50,50 100,0 200,0 150,50" fill="#00ff00" />
+	<polygon points="150,50 200,0 200,100 150,150" fill="#0000ff" />
+	<text x="75" y="115" fill="#ffffff" font-size="30" text-anchor="middle">F</text>
+	<text x="95" y="115" fill="#ffffff" font-size="30" text-anchor="middle">G</text>
+	<text x="115" y="115" fill="#ffffff" font-size="30" text-anchor="middle">E</text>
+</svg>

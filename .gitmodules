@@ -14,3 +14,6 @@
 [submodule "vendor/mono"]
 	path = vendor/mono
 	url = https://github.com/mono/mono.git
+[submodule "vendor/chaiscript"]
+	path = vendor/chaiscript
+	url = https://github.com/ChaiScript/ChaiScript.git
