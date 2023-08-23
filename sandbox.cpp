@@ -1,6 +1,3 @@
-#include <chrono>
-#include <thread>
-
 #include "pch.hpp"
 #include "glad/glad.h"
 #include "imgui.h"
