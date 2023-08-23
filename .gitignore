@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-/.vs
-/build
-=======
 /.vs
 build/
+dist/imgui.ini
 *.a
 *.exe
 >>>>>>> d0d939ea2d293ebd029d4fd6074ea2d87fedfc83

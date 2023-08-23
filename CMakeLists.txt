@@ -1,10 +1,14 @@
 cmake_minimum_required(VERSION 3.25)
 project(FGE LANGUAGES CXX C)
 
+if(WIN32)
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /subsystem:windows")
+endif(WIN32)
+
+add_definitions(-DFMT_HEADER_ONLY)
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/devil/DevIL/src-IL)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/devil/DevIL/src-ILU)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw)
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
@@ -21,14 +25,9 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/filewatch
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm/glm
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm/glm/gtc
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/devil/DevIL/include
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw/include
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb/include
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/utils
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/metadata
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/utils
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/mono/mono/jit
+	${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb
 	#ENGINE
 	${CMAKE_CURRENT_SOURCE_DIR}/src/engine
     ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/core
@@ -63,7 +62,6 @@ file(GLOB_RECURSE EDITOR_SRC
 add_library(glad STATIC vendor/glad/src/glad.c)
 add_library(imgui STATIC ${IMGUI_SRC})
 add_library(engine STATIC ${ENGINE_SRC})
-
 target_precompile_headers(engine PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/pch.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/utils.hpp
@@ -72,13 +70,14 @@ target_link_libraries(engine PRIVATE
 	spdlog
 	glm
 	glad
-	IL
-	ILU
 	glfw
 	imgui
 )
 
 add_executable(sandbox sandbox.cpp)
+target_precompile_headers(sandbox PRIVATE
+	${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb/stb_image.h
+)
 target_link_libraries(sandbox
 	engine
 )
@@ -88,10 +87,6 @@ add_custom_target(Copyfiles ALL
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_SOURCE_DIR}/dist
 	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:sandbox> ${CMAKE_CURRENT_SOURCE_DIR}/dist
 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/imgui.ini ${CMAKE_CURRENT_SOURCE_DIR}/dist
-	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IL> ${CMAKE_CURRENT_SOURCE_DIR}/dist
-	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:ILU> ${CMAKE_CURRENT_SOURCE_DIR}/dist
-	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:spdlog> ${CMAKE_CURRENT_SOURCE_DIR}/dist
-	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:glfw> ${CMAKE_CURRENT_SOURCE_DIR}/dist
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets ${CMAKE_CURRENT_SOURCE_DIR}/dist/assets
     COMMENT Copying files...
 )

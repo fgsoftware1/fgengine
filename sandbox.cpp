@@ -4,8 +4,8 @@
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_glfw.h"
 #include "Logger.hpp"
-#include "IL/il.h"
-#include "IL/ilu.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 #include "Window.hpp"
 #include "LightComponent.hpp"
 #include "CameraComponent.hpp"
@@ -18,32 +18,24 @@ using engine::core::Window;
 int main()
 {
 	Logger::Init();
-	ilInit();
-	iluInit();
 
 	Window window = Window(1366, 768, "FGE");
 	window.setVsync(true);
 
-	ILuint image;
-	ilGenImages(1, &image);
-	ilBindImage(image);
-	if (!ilLoadImage("assets/fge.png"))
+	int width, height, channels;
+	unsigned char *imageData = stbi_load("assets/fge.png", &width, &height, &channels, 0);
+
+	if (imageData == NULL)
 	{
-		const std::string iluErr = iluErrorString(ilGetError());
-		Logger::Error(LogChannel::App, "Failed to load image: " + iluErr);
+		Logger::Error(LogChannel::App, "Failed to load logo!");
 	}
-
-	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-
-	int width = ilGetInteger(IL_IMAGE_WIDTH);
-	int height = ilGetInteger(IL_IMAGE_HEIGHT);
-	ILubyte *imageData = ilGetData();
 
 	GLFWimage icon;
 	icon.width = width;
 	icon.height = height;
 	icon.pixels = imageData;
 	glfwSetWindowIcon(window.getWindow(), 1, &icon);
+	stbi_image_free(imageData);
 
 	int bufferWidth, bufferHeight;
 	glfwGetFramebufferSize(window.getWindow(), &bufferWidth, &bufferHeight);
@@ -149,3 +141,13 @@ int main()
 
 	return 0;
 }
+
+#ifdef _WIN32
+#include <Windows.h>
+
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+{
+	return main();
+}
+
+#endif //_WIN32

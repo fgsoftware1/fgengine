@@ -5,15 +5,12 @@
 [submodule "vendor/glm"]
 	path = vendor/glm
 	url = https://github.com/g-truc/glm.git
-[submodule "vendor/spdlog"]
-	path = vendor/spdlog
-	url = https://github.com/gabime/spdlog.git
 [submodule "vendor/glfw"]
 	path = vendor/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "build/Debug/vendor/devil"]
-	path = build/Debug/vendor/devil
-	url = https://github.com/fgsoftware1/DevIL.git
 [submodule "vendor/mono"]
 	path = vendor/mono
 	url = https://github.com/mono/mono.git
+[submodule "vendor/chaiscript"]
+	path = vendor/chaiscript
+	url = https://github.com/ChaiScript/ChaiScript.git

@@ -1,8 +1,5 @@
 #pragma once
 
-#define WINDOWS_IGNORE_PACKING_MISMATCH
-#define STB_IMAGE_IMPLEMENTATION
-
 #include <iostream>
 #include <string>
 #include <fstream>

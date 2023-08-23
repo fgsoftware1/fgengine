@@ -30,18 +30,19 @@ namespace engine
 			m_Window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 			if (!m_Window)
 			{
-				Logger::Error(LogChannel::App, "Window creation failed, can't continue!");
+				Logger::Error(LogChannel::App, "Window creation failed, can't continue! :()");
 				glfwTerminate();
 				return;
 			}
 
+#ifndef NDEBUG
 			Logger::Debug(LogChannel::Engine, "GLFW initialized!");
-
+#endif // NDEBUG
 			glfwMakeContextCurrent(m_Window);
 
 			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			{
-				Logger::Error(LogChannel::Engine, "Failed to initialize GLAD\n" + glad_glGetError());
+				Logger::Error(LogChannel::Engine, "Failed to initialize GLAD, can't continue! :(\n" + glad_glGetError());
 				glfwTerminate();
 			}
 		}
