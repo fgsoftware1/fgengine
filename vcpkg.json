@@ -1,0 +1,32 @@
+{
+  "dependencies": [
+    "boost-algorithm",
+    "boost-filesystem",
+    "box2d",
+    "chaiscript",
+    {
+      "name": "glad",
+      "features": [
+        "gl-api-44"
+      ]
+    },
+    "glfw3",
+    "glm",
+    {
+      "name": "imgui",
+      "features": [
+        "docking-experimental",
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    },
+    "imguizmo",
+    "implot",
+    "jsoncpp",
+    "spdlog",
+    "stb",
+    "thomasmonkman-filewatch",
+    "yaml-cpp",
+    "magic-enum"
+  ]
+}
