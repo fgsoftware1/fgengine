@@ -2,10 +2,10 @@
 
 #include "imgui.h"
 #include "glad/glad.h"
+#include "glm/glm.hpp"
 
 #include "pch.hpp"
 #include "ecs/Component.hpp"
-#include "math/Vector3.hpp"
 #include "core/Logger.hpp"
 
 using engine::core::LogChannel;
@@ -54,9 +54,9 @@ public:
     const std::string& getName() const override { return name; }
 
 public:
-	Vector3 position;
-	Vector3 rotation;
-	Vector3 scale;
+	glm::vec3 position;
+    glm::vec3 rotation;
+    glm::vec3 scale;
 private:
     static inline std::string name = "Transform";
 };

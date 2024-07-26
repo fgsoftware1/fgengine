@@ -5,22 +5,23 @@
 namespace math
 {
     /**
-     * @brief A class representing a 3D vector with x, y, and z components.
+     * @brief A class representing a 4D vector with x, y, z, and w components.
      */
-    class Vector3
+    class Vector4
     {
     private:
-        float x, y, z;
+        float x, y, z, w;
 
     public:
         /**
-         * @brief Constructs a Vector3 with the given components.
+         * @brief Constructs a Vector4 with the given components.
          *
          * @param x The x component of the vector.
          * @param y The y component of the vector.
          * @param z The z component of the vector.
+         * @param w The w component of the vector.
          */
-        Vector3(float x = 0.0f, float y = 0.0f, float z = 0.0f) : x(x), y(y), z(z) {}
+        Vector4(float x = 0.0f, float y = 0.0f, float z = 0.0f, float w = 0.0f) : x(x), y(y), z(z), w(w) {}
 
         /**
          * @brief Returns the x component of the vector.
@@ -63,5 +64,19 @@ namespace math
          * @param z The new z component of the vector.
          */
         void setZ(float z) { this->z = z; }
+
+        /**
+         * @brief Returns the w component of the vector.
+         *
+         * @return The w component of the vector.
+         */
+        float getW() const { return w; }
+
+        /**
+         * @brief Sets the w component of the vector.
+         *
+         * @param w The new w component of the vector.
+         */
+        void setW(float w) { this->w = w; }
     };
 } // namespace math

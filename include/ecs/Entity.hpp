@@ -94,7 +94,6 @@ public:
         }
     }
 
-
     /**
      * @brief Get the names of the components of the entity.
      *

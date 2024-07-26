@@ -4,12 +4,7 @@
     "boost-filesystem",
     "box2d",
     "chaiscript",
-    {
-      "name": "glad",
-      "features": [
-        "gl-api-44"
-      ]
-    },
+    "glad",
     "glfw3",
     "glm",
     {
@@ -23,10 +18,10 @@
     "imguizmo",
     "implot",
     "jsoncpp",
+    "magic-enum",
     "spdlog",
     "stb",
-    "thomasmonkman-filewatch",
     "yaml-cpp",
-    "magic-enum"
+    "boost-smart-ptr"
   ]
 }

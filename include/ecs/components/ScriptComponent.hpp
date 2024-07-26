@@ -7,8 +7,20 @@
 #include "scripting/IParser.hpp"
 #include "scripting/ParserFactory.hpp"
 
+/**
+ * @class ScriptComponent
+ * @brief ScriptComponent is a component that can execute scripts.
+ *
+ * The ScriptComponent class allows the user to load and execute scripts.
+ * It uses the ParserFactory to create a parser for the script based on its extension.
+ * The script can be loaded from a file, and the values of its fields can be modified in the ImGui interface.
+ */
 class ScriptComponent : public Component {
 public:
+    /**
+     * @brief Constructs a new ScriptComponent object.
+     * @param scriptPath The path to the script file.
+     */
     ScriptComponent(const std::string& scriptPath = "") : scriptPath(scriptPath) {
         registerComponentName(name);
         if (!scriptPath.empty()) {
@@ -19,6 +31,9 @@ public:
         }
     }
 
+    /**
+     * @brief Draws the script component in the ImGui interface.
+     */
     void draw() override {
         ImGui::Columns(2);
         for (const auto& field : scriptClass.fields) {
@@ -46,6 +61,10 @@ public:
         ImGui::Columns(1); 
     }
 
+    /**
+     * @brief Returns the name of the component.
+     * @return The name of the component.
+     */
     const std::string& getName() const override { return name; }
 
 private:

@@ -11,7 +11,7 @@ namespace engine
 		std::shared_ptr<spdlog::logger> Logger::s_AppLogger;
 		std::shared_ptr<spdlog::logger> Logger::s_ScriptingLogger;
 		std::function<void(LogChannel, const std::string &)> Logger::s_Callback;
-		std::vector<std::pair<LogChannel, std::string>> Logger::s_Messages;
+		std::vector<std::tuple<LogChannel, std::string, ImVec4>> Logger::s_Messages;
 
 		void Logger::Init()
 		{
@@ -44,7 +44,7 @@ namespace engine
 		void Logger::Info(LogChannel channel, const std::string &message)
 		{
 			std::cout << "\033[32m" << magic_enum::enum_name(channel) << ": " << message.c_str() << "\033[0m" << std::endl;
-			Log(channel, message, ImVec4(1.0f, 1.0f, 1.0f, 1.0f)); // White
+			Log(channel, message, ImVec4(0.0f, 0.0f, 1.0f, 1.0f)); // Blue
 		}
 
 		void Logger::Warn(LogChannel channel, const std::string &message)
@@ -55,13 +55,13 @@ namespace engine
 
 		void Logger::Error(LogChannel channel, const std::string &message)
 		{
-			std::cout << "\033[31m" << magic_enum::enum_name(channel) << ": " << message.c_str() << "\033[0m" << std::endl;
-			Log(channel, message, ImVec4(1.0f, 0.0f, 0.0f, 1.0f)); // Red
+			std::cout << "\033[1;31m" << magic_enum::enum_name(channel) << ": " << message.c_str() << "\033[0m" << std::endl;
+			Log(channel, message, ImVec4(1.0f, 0.5f, 0.0f, 1.0f)); // Orange
 		}
 
 		void Logger::Critical(LogChannel channel, const std::string &message)
 		{
-			std::cout << "\033[1;31m" << magic_enum::enum_name(channel) << ": " << message.c_str() << "\033[0m" << std::endl;
+			std::cout << "\033[31m" << magic_enum::enum_name(channel) << ": " << message.c_str() << "\033[0m" << std::endl;
 			Log(channel, message, ImVec4(1.0f, 0.0f, 0.0f, 1.0f)); // Red
 		}
 
@@ -90,13 +90,13 @@ namespace engine
 				textColor.z * color.z,
 				textColor.w * color.w);
 
-			s_Messages.emplace_back(channel, fmt::format("{1}", finalColor, message));
+			s_Messages.emplace_back(std::make_tuple(channel, fmt::format("{1}", finalColor, message), color));
 
 			if (s_Callback)
 				s_Callback(channel, message);
 		}
 
-		const std::vector<std::pair<LogChannel, std::string>> &Logger::GetMessages()
+		const std::vector<std::tuple<LogChannel, std::string, ImVec4>> &Logger::GetMessages()
 		{
 			return s_Messages;
 		}

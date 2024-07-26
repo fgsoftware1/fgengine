@@ -1,14 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
-project(fge)
+project(fge CXX)
 
-set (CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(WRENBIND17_BUILD_WREN ON CACHE BOOL "" FORCE)
 
 if(MSVC)
-  add_compile_options(/bigobj)
+	add_compile_options(/bigobj)
 endif()
+
+add_compile_definitions()
 
 find_package(spdlog CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
@@ -37,7 +39,7 @@ file(GLOB_RECURSE fge_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.cpp")
 
 add_library(${PROJECT_NAME} STATIC ${fge_SRC})
 target_precompile_headers(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.hpp)
-target_link_libraries(${PROJECT_NAME} PUBLIC WrenBind17 spdlog::spdlog_header_only glad::glad glfw Boost::algorithm Boost::filesystem yaml-cpp::yaml-cpp glm::glm-header-only magic_enum::magic_enum)
-add_executable("Sandbox" ${CMAKE_CURRENT_SOURCE_DIR}/Sandbox.cpp) 
+target_link_libraries(${PROJECT_NAME} PRIVATE WrenBind17 spdlog::spdlog_header_only glad::glad glfw Boost::algorithm Boost::filesystem yaml-cpp::yaml-cpp glm::glm-header-only magic_enum::magic_enum)
+add_executable("Sandbox" ${CMAKE_CURRENT_SOURCE_DIR}/Sandbox.cpp)
 target_include_directories("Sandbox" PRIVATE ${Stb_INCLUDE_DIR})
 target_link_libraries("Sandbox" PRIVATE fge imgui::imgui implot::implot)

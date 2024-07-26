@@ -14,6 +14,8 @@
 #include <stdexcept>
 #include <map>
 
+#include "glad/glad.h"
+
 template <typename T>
 using Scope = std::unique_ptr<T>;
 template <typename T, typename... Args>

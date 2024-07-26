@@ -18,4 +18,5 @@ public:
             // Unknown component type
             return nullptr;
         }
+    }
 };

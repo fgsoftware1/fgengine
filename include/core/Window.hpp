@@ -1,35 +1,62 @@
 #pragma once
 
-#define GLFW_INCLUDE_NONE
-
 #include "GLFW/glfw3.h"
 
 #include "pch.hpp"
+#include "core/Logger.hpp"
 
-namespace engine
+using namespace engine::core;
+
+class Window
 {
-	namespace core
-	{
-		class Window
-		{
-		public:
-			int windowWidth, windowHeight;
-			std::string windowTitle;
-			GLFWwindow* windowHandle;
+public:
+    static Window &getInstance()
+    {
+        static Window instance;
+        return instance;
+    }
 
-		public:
-			Window();
-			Window(int width, int height, std::string title);
+    GLFWwindow *getWindow()
+    {
+        return window;
+    }
 
-			int Run();
+    void Init(int width = 640, int height = 480, const char *title = "Hello World")
+    {
+        if (!glfwInit())
+            exit(EXIT_FAILURE);
 
-		protected:
-			virtual void Init() = 0;
-			virtual void Load() = 0;
-			virtual void Render() = 0;
-			virtual void Update() = 0;
-			virtual void Unload() = 0;
-			virtual void Shutdown() = 0;
-		};
-	} // namespace core
-} // namespace engine
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+
+        window = glfwCreateWindow(width, height, title, NULL, NULL);
+        if (!window)
+        {
+            glfwTerminate();
+            exit(EXIT_FAILURE);
+        }
+
+        glfwMakeContextCurrent(window);
+
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        {
+            Logger::Error(LogChannel::Engine, "Failed to initialize GLAD, can't continue! :(\n" + glad_glGetError());
+            glfwTerminate();
+        }
+    }
+
+    void Shutdown()
+    {
+        glfwDestroyWindow(window);
+        glfwTerminate();
+    }
+
+private:
+    Window() {}
+    Window(const Window &) = delete;
+    Window &operator=(const Window &) = delete;
+    Window(Window &&) = delete;
+    Window &operator=(Window &&) = delete;
+
+    GLFWwindow *window;
+};

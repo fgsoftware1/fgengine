@@ -43,8 +43,9 @@ namespace engine
 			static void Error(LogChannel channel, const std::string &message);
 			static void Critical(LogChannel channel, const std::string &message);
 
-			static const std::vector<std::pair<LogChannel, std::string>> &GetMessages();
-			static std::vector<std::pair<LogChannel, std::string>> s_Messages;
+			static const std::vector<std::tuple<LogChannel, std::string, ImVec4>> &GetMessages();
+
+			static std::vector<std::tuple<LogChannel, std::string, ImVec4>> s_Messages;
 
 		private:
 			static void Log(LogChannel channel, const std::string &message, const ImVec4 &color = ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
